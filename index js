@@ -1,0 +1,30 @@
+const express = require("express");
+const fetch = require("node-fetch");
+
+const app = express();
+app.use(express.json());
+
+app.post("/hackrx/run", async (req, res) => {
+    const { documents, questions } = req.body;
+
+    if (!documents || !questions) {
+        return res.status(400).json({ error: "Missing documents or questions" });
+    }
+
+    const docText = await fetch(documents).then(r => r.text());
+    
+    const results = questions.map(q => ({
+        question: q,
+        answer: docText.includes(q)
+            ? "Relevant content found in the document."
+            : "No direct match found."
+    }));
+
+    res.json({ results });
+});
+
+app.get("/", (req, res) => {
+    res.send("HackRx Webhook is live!");
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));
