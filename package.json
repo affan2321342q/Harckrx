@@ -1,16 +1,14 @@
 {
-  "name": "hackrx-webhook-llm",
+  "name": "hackrx",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "node-fetch": "^2.6.9",
-    "pdf-parse": "^1.1.1",
-    "mammoth": "^1.4.17",
-    "openai": "^4.9.0"
+    "openai": "^4.0.0",
+    "dotenv": "^16.0.3"
   }
 }
